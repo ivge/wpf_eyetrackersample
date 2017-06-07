@@ -1,0 +1,48 @@
+﻿<Window x:Class="wpf_eyetrackersample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_eyetrackersample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="449.605" Width="641.206"
+        Closing="MainWindow_Closing">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" TextWrapping="Wrap"  Width="600" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
+        <Button x:Name="b1" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="128" Opacity="0.5" Grid.Column="0" Grid.Row="1" Height="22" >
+            <Button.Content>
+                1
+            </Button.Content>
+        </Button>
+        <Button x:Name="b4" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Width="128" Opacity="0.5" Grid.Column="0" Grid.Row="1" Height="22" >
+            <Button.Content>
+                4
+            </Button.Content>
+        </Button>
+        <Button x:Name="b2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="128" Opacity="0.5" Grid.Column="1" Grid.Row="1" >
+            <Button.Content>
+                2
+            </Button.Content>
+        </Button>
+        <Button x:Name="b3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="64" Width="128" Opacity="0.5" Grid.Column="2" Grid.Row="1" >
+            <Button.Content>
+                3
+            </Button.Content>
+        </Button>
+        <Button x:Name="b5" HorizontalAlignment="Right" VerticalAlignment="Top" Height="64" Width="128" Opacity="0.5" Grid.Column="2" Grid.Row="1" >
+            <Button.Content>
+                5
+            </Button.Content>
+        </Button>
+
+    </Grid>
+</Window>
