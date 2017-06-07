@@ -30,7 +30,7 @@ namespace wpf_eyetrackersample
             var stream = eyeTrackerFactory.CreateMouseTracker().GetGazeStream();
             var gazeObserver = new GazeObserver();
             subscription = stream.Subscribe(gazeObserver);
-            StartTimers(gazeObserver);
+            InitializeTimers(gazeObserver);
         }
 
         
@@ -40,7 +40,7 @@ namespace wpf_eyetrackersample
             subscription.Dispose();
         }
 
-        private void StartTimers(GazeObserver gazeObserver)
+        private void InitializeTimers(GazeObserver gazeObserver)
         {
             //create timer which will add selected button to text box  
             timer = new Timer((object obj) =>
@@ -55,7 +55,7 @@ namespace wpf_eyetrackersample
                 }));
             });
 
-            //this timer will check when if pointer is changed and update buttons state 
+            //create timer which will check when pointer is changed and update buttons state 
             mouseMoveChecker = new Timer((object obj) =>
             {
                 this.Dispatcher.BeginInvoke(new Action(() =>
@@ -66,6 +66,7 @@ namespace wpf_eyetrackersample
         }
         private void PointerCheck(GazeObserver gazeObserver)
         {
+            //set local flag to see if any button selected 
             bool isAnyButtonSelected = false; 
             //get list of all objects on MainWindow
             var UIelements = ((Grid)Application.Current.MainWindow?.Content)?.Children;
