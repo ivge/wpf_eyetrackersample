@@ -21,11 +21,16 @@ namespace wpf_eyetrackersample
         {
             view = value.X + " " + value.Y;
             pointer = value;
+            onChange();
         }
 
         public GazeObserver()
         {
             view = "";
         }
+
+        public delegate void MethodContainer();
+
+        public event MethodContainer onChange;
     }
 }

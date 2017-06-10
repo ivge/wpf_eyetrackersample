@@ -18,8 +18,6 @@ namespace wpf_eyetrackersample
         private Button selectedButton;
         //timer which append button content to text string 
         private Timer timer;
-        //timer which checks gaze observer changes 
-        private Timer mouseMoveChecker;
         //subscription to gaze stream 
         private IDisposable subscription;
 
@@ -30,7 +28,8 @@ namespace wpf_eyetrackersample
             var stream = eyeTrackerFactory.CreateMouseTracker().GetGazeStream();
             var gazeObserver = new GazeObserver();
             subscription = stream.Subscribe(gazeObserver);
-            InitializeTimers(gazeObserver);
+            InitializeTimer(gazeObserver);
+            gazeObserver.onChange += () => { PointerCheck(gazeObserver); };
         }
 
         
@@ -40,7 +39,7 @@ namespace wpf_eyetrackersample
             subscription.Dispose();
         }
 
-        private void InitializeTimers(GazeObserver gazeObserver)
+        private void InitializeTimer(GazeObserver gazeObserver)
         {
             //create timer which will add selected button to text box  
             timer = new Timer((object obj) =>
@@ -54,22 +53,23 @@ namespace wpf_eyetrackersample
                     }
                 }));
             });
-
-            //create timer which will check when pointer is changed and update buttons state 
-            mouseMoveChecker = new Timer((object obj) =>
-            {
-                this.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    PointerCheck(gazeObserver);
-                }));
-            }, null, 0, 25);
         }
+
         private void PointerCheck(GazeObserver gazeObserver)
         {
-            //set local flag to see if any button selected 
-            bool isAnyButtonSelected = false; 
             //get list of all objects on MainWindow
-            var UIelements = ((Grid)Application.Current.MainWindow?.Content)?.Children;
+            UIElementCollection UIelements = null;
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                UIelements = ((Grid)Application.Current.MainWindow?.Content)?.Children;
+                checkUIElementsUnderPointer(UIelements, gazeObserver);
+            }));
+        }
+
+        private void checkUIElementsUnderPointer(UIElementCollection UIelements, GazeObserver gazeObserver)
+        {
+            //set local flag to see if any button selected 
+            bool isAnyButtonSelected = false;
 
             //if window is disposed and there is no more objects on mainwindow then exit 
             if (UIelements == null) return;
@@ -111,8 +111,8 @@ namespace wpf_eyetrackersample
                 timer.Change(Timeout.Infinite, Timeout.Infinite);
                 selectedButton = null;
             }
-
         }
+
         private bool CheckButtonUnderPointer(Button button, GazeObserver gazeObserver)
         {
             // Get absolute location on screen of upper left and bottom right corners of button

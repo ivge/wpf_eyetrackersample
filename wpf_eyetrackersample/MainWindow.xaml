@@ -18,7 +18,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="textBox1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="32" TextWrapping="Wrap"  Width="600" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
-        <Button x:Name="b1" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="128" Opacity="0.5" Grid.Column="0" Grid.Row="1" Height="22" >
+        <Button x:Name="b1" HorizontalAlignment="Center" VerticalAlignment="Top"  Width="128" Opacity="0.5" Grid.Column="0" Grid.Row="1" Height="22">
             <Button.Content>
                 1
             </Button.Content>
